@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>气象实时数据</title>
+    <script src="js/echarts.min.js"></script>
+    <script src="js/jquery.js"></script>
+</head>
+<body>
+    <script>
+        weather()
+        let myDate = new Date();
+        let myDateS = myDate.getSeconds()*1000;
+        let myDateMs = myDate.getMilliseconds();//获取到毫秒以减少误差
+        setTimeout(function () {
+            let y = dt.getFullYear()
+            let mt = dt.getMonth() + 1
+            let day = dt.getDate()
+            let h = dt.getHours()
+            mt = addZero(mt)
+            day = addZero(day)
+            h = addZero(h)
+            let OBSERVTIME = y + '-' + mt + '-' + day + ' ' + h + ':00:00'
+            weather()
+        },3600000-myDateS-myDateMs);
+        let t = null
+        t = setTimeout(time, 1000)
+        function time() {
+            clearTimeout(t) //清除定时器
+            dt = new Date()
+            let y = dt.getFullYear()
+            let mt = dt.getMonth() + 1
+            let day = dt.getDate()
+            let h = dt.getHours()
+            let m = dt.getMinutes()
+            let s = dt.getSeconds()
+            let xin = dt.getDay()
+            let weeks = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六")
+            let week = weeks[xin]
+            mt = addZero(mt)
+            day = addZero(day)
+            h = addZero(h)
+            m = addZero(m)
+            s = addZero(s)
+            document.querySelector(".showTime").innerHTML = "当前时间: " + y + "年" + mt + "月" + day + "日 "+ week + " " + h + "时" + m + "分" + s + "秒"
+            t = setTimeout(time, 1000)
+        }
+        function addZero(num) {
+            if(num < 10) {
+                num = '0' + num
+            }
+            return num
+        }
+        function weather() {
+            let authToken = 'b003ca05f3e6a60fbdda7f4d8ad04c6c'
+            let STATIONID = '59838'
+            dt = new Date()
+            let y = dt.getFullYear()
+            let mt = dt.getMonth() + 1
+            let day = dt.getDate()
+            let h = dt.getHours()
+            mt = addZero(mt)
+            day = addZero(day)
+            h = addZero(h)
+            let OBSERVTIME = y + '-' + mt + '-' + day + ' ' + h + ':00:00'
+            console.log("http://data.hainan.gov.cn//api/invoke/17b8c26d45064c7fad1a5b04026e6483?authToken=" + authToken + "&STATIONID="+ STATIONID + "&OBSERVTIME=" + OBSERVTIME)
+            $.ajax({
+                url:"http://data.hainan.gov.cn//api/invoke/17b8c26d45064c7fad1a5b04026e6483?authToken=" + authToken + "&STATIONID="+ STATIONID + "&OBSERVTIME=" + OBSERVTIME,    //请求的url地址
+                contentType: 'application/x-www-form-urlencoded',
+                dataType:"json",   //返回格式为json
+                async:true,        //请求是否异步，默认为异步，这也是ajax重要特性
+                type: "POST",
+                success:function(res){
+                    console.log(res)
+                    //请求成功
+                }
+            });
+        }
+    </script>
+    <div class="showTime"></div>
+</body>
+</html>

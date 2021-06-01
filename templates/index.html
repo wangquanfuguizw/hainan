@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>海南自贸港数据可视化</title>
+    <script src="static/js/echarts.min.js"></script>
+    <script src="static/js/jquery.js"></script>
+    <script src="static/js/time.js"></script>
+    <script src="static/js/vue.js"></script>
+    <link rel="stylesheet" href="static/css/index.css">
+</head>
+<body>
+<div id="vue">
+    <div class="top">
+        <div class="top_bg">海南自贸区(港)旅游信息共享平台</div>
+        <div class="showTime"></div>
+    </div>
+    <div class="middle">
+        <div class="middleLeft">
+            <div class="leftTop">
+                <div class="image-title" id="first">地区经济</div>
+                <div class="image-border1 image-border"></div>
+                <div class="image-border2 image-border"></div>
+                <div class="image-border3 image-border"></div>
+                <div class="image-border4 image-border"></div>
+                <div id="leftTop" style="width:400px;height:180px;position: absolute;left: 50%;top: 50%;transform: translateX(-50%) translateY(-50%);"></div>
+            </div>
+            <div class="leftBottom">
+                <div class="image-title" id="second">热门景区</div>
+                <div class="image-border1 image-border"></div>
+                <div class="image-border2 image-border"></div>
+                <div class="image-border3 image-border"></div>
+                <div class="image-border4 image-border"></div>
+                <div id="leftBottom" style="width:100%;height:100%;"></div>
+            </div>
+        </div>
+        <div class="bg_map"></div>
+        <div class="bg_map2"></div>
+        <div class="bg_map3"></div>
+        <div class="map">
+            <div class="image-title" id="zero">海南地图</div>
+            <div class="image-border1 image-border"></div>
+            <div class="image-border2 image-border"></div>
+            <div class="image-border3 image-border"></div>
+            <div class="image-border4 image-border"></div>
+            <div id="chart_map" style="width:600px;height:400px;" class="mapEchart"></div>
+        </div>
+        <div class="middleRight">
+            <div class="rightTop">
+                <div class="image-title" id="sixth">词频分析</div>
+                <div class="image-border1 image-border"></div>
+                <div class="image-border2 image-border"></div>
+                <div class="image-border3 image-border"></div>
+                <div class="image-border4 image-border"></div>
+                <div id="rightTop" style="width:100%;height:100%;"></div>
+            </div>
+            <div class="rightBottom">
+                <div class="image-title" id="fifth">大事记</div>
+                <div class="image-border1 image-border"></div>
+                <div class="image-border2 image-border"></div>
+                <div class="image-border3 image-border"></div>
+                <div class="image-border4 image-border"></div>
+                <div style="width:100%;height:100%;overflow: hidden;color: white" id="rightBottom">
+                    <div style="display: flex;justify-content: space-around;width: 100%;font-size: 15px">
+                        <div style="width: 70%;text-align: center">事件</div>
+                        <div style="width: 30%;text-align: center">时间</div>
+                    </div>
+                        <marquee onmouseover="this.stop()" onmouseout="this.start()" direction="up" behavior=scroll style="height: 150px">
+                            <div style="display: flex;justify-content: space-between;align-items: center;width: 100%;margin-bottom: 10px">
+                                <div style="width: 70%;text-indent: 2em">4月21日，商务部印发《海南省服务业扩大开放综合试点总体方案》，提出围绕旅游、交通运输、金融、商务服务、技术服务、医疗健康、教育、文化娱乐等重点领域，全面有效推进海南省服务业扩大开放综合试点工作。</div>
+                                <div style="width: 30%;text-align: center">2021-04-21</div>
+                            </div>
+                            <div style="display: flex;justify-content: space-between;align-items: center;width: 100%;margin-bottom: 10px">
+                                <div style="width: 70%;text-indent: 2em">4月20日，博鳌亚洲论坛2021年年会开幕式在海南博鳌举行，国家主席习近平以视频方式发表题为《同舟共济克时艰，命运与共创未来》的主旨演讲。</div>
+                                <div style="width: 30%;text-align: center">2021-04-20</div>
+                            </div>
+                            <div style="display: flex;justify-content: space-between;align-items: center;width: 100%;margin-bottom: 10px">
+                                <div style="width: 70%;text-indent: 2em">4月13日，海南自由贸易港2021年(第二批)重点项目集中签约活动在海口举行，共签约106个项目，协议投资金额约657亿元。</div>
+                                <div style="width: 30%;text-align: center">2021-04-13</div>
+                            </div>
+                            <div style="display: flex;justify-content: space-between;align-items: center;width: 100%;margin-bottom: 10px">
+                                <div style="width: 70%;text-indent: 2em">4月12日，中共中央宣传部、国务院新闻办公室召开海南自由贸易港建设专题新闻发布会，国家五部委联合海南省对海南三年全面深化改革开放及自贸港政策制度全面解读。</div>
+                                <div style="width: 30%;text-align: center">2021-04-12</div>
+                            </div>
+                            <div style="display: flex;justify-content: space-between;align-items: center;width: 100%;margin-bottom: 10px">
+                                <div style="width: 70%;text-indent: 2em">4月10日，海南自由贸易港第十二批5项制度创新案例集中发布。</div>
+                                <div style="width: 30%;text-align: center">2021-04-10</div>
+                            </div>
+                            <div style="display: flex;justify-content: space-between;align-items: center;width: 100%;margin-bottom: 10px">
+                                <div style="width: 70%;text-indent: 2em">4月8日，国家发展改革委、商务部联合发布《关于支持海南自由贸易港建设放宽市场准入若干特别措施的意见》，推出支持海南开展互联网处方药销售、支持国内知名高校在海南建立国际学院、优化海南商业航天领域市场准入环境、放宽海南种业市场准入等22条特别措施。</div>
+                                <div style="width: 30%;text-align: center">2021-04-08</div>
+                            </div>
+                            <div style="display: flex;justify-content: space-between;align-items: center;width: 100%;margin-bottom: 10px">
+                                <div style="width: 70%;text-indent: 2em">3月31日，新型离岸国际贸易先行示范区在洋浦保税港区正式挂牌运行，同时，洋浦发布了全球贸易商计划。</div>
+                                <div style="width: 30%;text-align: center">2021-03-31</div>
+                            </div>
+                        </marquee>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="bottomLeft">
+            <div class="image-title" id="third">景点热搜</div>
+            <div class="image-border1 image-border"></div>
+            <div class="image-border2 image-border"></div>
+            <div class="image-border3 image-border"></div>
+            <div class="image-border4 image-border"></div>
+            <div id="bottomLeft" style="width:100%;height:100%;"></div>
+        </div>
+        <div class="bottomMiddle">
+            <div class="image-border1 image-border"></div>
+            <div class="image-border2 image-border"></div>
+            <div class="image-border3 image-border"></div>
+            <div class="image-border4 image-border"></div>
+            <div id="bottomMiddle" style="width:100%;height: 220px;"></div>
+        </div>
+        <div class="bottomRight">
+            <div class="image-title" id="fourth">游客散点图</div>
+            <div class="image-border1 image-border"></div>
+            <div class="image-border2 image-border"></div>
+            <div class="image-border3 image-border"></div>
+            <div class="image-border4 image-border"></div>
+            <div id="bottomRight" style="width:100%;height:100%;"></div>
+        </div>
+    </div>
+</div>
+<script>
+    let vue = new Vue({
+        el: '#vue',
+        data: {
+            title: [
+                '海南地图',
+                '地区经济',
+                '热门景区',
+                '景点热搜',
+                '游客散点图',
+                '大事记',
+                '词频分析'
+            ]
+        }
+    })
+    let airData = [
+        { name: '海口市', value: 17915815},
+        { name: '三亚市', value: 6954120},
+        { name: '三沙市', value: 151151},
+        { name: '儋州市', value: 3594060},
+        { name: '五指山市', value: 340518},
+        { name: '琼海市', value: 2920957},
+        { name: '文昌市', value: 2635012},
+        { name: '万宁市', value: 2374047},
+        { name: '东方市', value: 1865010},
+        { name: '定安县', value: 1058763},
+        { name: '屯昌县', value: 889851},
+        { name: '澄迈县', value: 348365},
+        { name: '临高县', value: 2042233},
+        { name: '白沙黎族自治县', value: 568498},
+        { name: '昌江黎族自治县', value: 1241180},
+        { name: '乐东黎族自治县', value: 1511114},
+        { name: '陵水黎族自治县', value: 1955172},
+        { name: '保亭黎族苗族自治县', value: 562728},
+        { name: '琼中黎族苗族自治县', value: 590073}
+    ]
+    let city = ['海口', '三亚', '三沙', '儋州', '五指山', '琼海', '文昌', '万宁', '东方', '定安', '屯昌', '澄迈', '临高', '白沙', '昌江', '乐东', '陵水', '保亭', '琼中']
+    let myChart = echarts.init(document.getElementById('chart_map'))
+    let leftTop = echarts.init(document.getElementById('leftTop'))
+    let leftBottom = echarts.init(document.getElementById('leftBottom'))
+    let rightTop = echarts.init(document.getElementById('rightTop'))
+    let bottomLeft = echarts.init(document.getElementById('bottomLeft'))
+    let bottomMiddle = echarts.init(document.getElementById('bottomMiddle'))
+    let bottomRight = echarts.init(document.getElementById('bottomRight'))
+    let yearList = [2016,2017,2018,2019,2020]
+    let dataMax = [
+        {
+            name: '餐饮',
+            max: 100
+        },
+        {
+            name: '出行',
+            max: 100
+        },
+        {
+            name: '居住',
+            max: 100
+        },
+        {
+            name: '游玩',
+            max: 100
+        },
+        {
+            name: '购物',
+            max: 100
+        }
+    ]
+    $.get('static/hainan.json',function (ret) {
+        console.log(ret)
+        echarts.registerMap('hainan', ret)
+        let option = {
+            title: {
+                text: '2020年海南省各市经济情况展示',
+                left: 'left',
+                textStyle: {
+                    color: '#fff',
+                    fontSize: '15px'
+                }
+            },
+            tooltip: {
+                trigger: 'item',
+                triggerOn: 'mousemove',
+                formatter: '{b}',
+                backgroundColor: 'white',
+                textStyle: {
+                    color: 'black'
+                }
+            },
+            geo: {
+                type: 'map',
+                map: 'hainan',
+                label: {
+                    show: true,
+                    normal: {
+                        show: true,
+                        textStyle: {
+                            color: 'white',
+                            fontSize: '10px'
+                        }
+                    },
+                    emphasis: { // 对应的鼠标悬浮效果
+                        show: true,
+                        textStyle: {
+                            color: "red",
+                            fontSize: '15px'
+                        }
+                    }
+                },
+                roam: true,
+                scaleLimit: {
+                    min: 8,
+                    max: 20
+                },
+                center: [109.839996, 19.03557]
+            },
+            visualMap: {
+                    min: 0,
+                    max: 20000000,
+                    inRange: {
+                        color: ['#6a99b7', '#0066ba'],
+                        borderColor: '#0066ba',
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    },
+                    textStyle: {
+                                color: 'white'
+                    },
+                    calculable: true
+            },
+            series: [
+                    {
+                        data: airData,
+                        geoIndex: 0,
+                        type: 'map',
+                    },
+                    {
+                        data: [
+                            {
+                                name: '三亚中央商务区',
+                                value: [109.608268, 18.307872]
+                            },
+                            {
+                                name: '陵水黎安国际教育创新试验区',
+                                value: [110.008268, 18.397872]
+                            },
+                            {
+                                name: '三亚崖州湾科技城',
+                                value: [109.178268, 18.347872]
+                            },
+                            {
+                                name: '海口复兴城互联网信息产业园',
+                                value: [110.38119, 20.091971]
+                            },
+                            {
+                                name: '海口江东新区',
+                                value: [110.50119, 20.051971]
+                            },
+                            {
+                                name: '海口国家高新技术产业开发区',
+                                value: [110.35119, 19.991971]
+                            },
+                            {
+                                name: '生态软件园',
+                                value: [110.12119, 19.981971]
+                            },
+                            {
+                                name: '海口综合保税区',
+                                value: [110.02119, 19.981971]
+                            },
+                            {
+                                name: '洋浦经济开发区',
+                                value: [109.78119, 19.981971]
+                            },
+                            {
+                                name: '洋浦经济开发区',
+                                value: [109.14119, 19.731971]
+                            },
+                            {
+                                name: '洋浦经济开发区',
+                                value: [108.60119, 19.151971]
+                            },
+                            {
+                                name: '博鳌乐城国际医疗旅游先行区',
+                                value: [110.57119, 19.181971]
+                            },
+                            {
+                                name: '文昌国际航天楼',
+                                value: [110.89119, 19.581971]
+                            }
+                        ],
+                        type: 'effectScatter',
+                        coordinateSystem: 'geo',
+                        rippleEffect: {
+                            scale: 5,
+                            color: 'blue'
+                        },
+                        itemStyle: {
+                            emphasis: {
+                                color: 'yellow',
+                                show: true
+                            }
+                        }
+                    }
+            ]
+        }
+        myChart.setOption(option);
+        myChart.on('click', function(params){
+			console.log(params);//此处写点击事件内容
+            if(params.seriesType == 'map') {
+                let option = {
+                    geo: {
+                        center: ret.features[params.dataIndex].properties.cp,
+                        zoom: 25
+                    }
+                }
+                myChart.setOption(option)
+                $.ajax({
+                    url: 'http://127.0.0.1:8000/weather/',
+                    type: "POST",
+                    data: {
+                        name: city[params.dataIndex]
+                    },
+                    success(res) {
+                        console.log(city[params.dataIndex])
+                        console.log(res)
+                        document.querySelector("#zero").innerHTML = res.result.title[0]
+                        document.querySelector("#first").innerHTML = res.result.title[1]
+                        document.querySelector("#second").innerHTML = res.result.title[2]
+                        document.querySelector("#third").innerHTML = res.result.title[3]
+                        document.querySelector("#fourth").innerHTML = res.result.title[4]
+                        document.querySelector("#fifth").innerHTML = res.result.title[5]
+                        document.querySelector("#sixth").innerHTML = res.result.title[6]
+                        leftTop.dispose()
+                        leftBottom.dispose()
+                        bottomMiddle.dispose()
+                        rightTop.dispose()
+                        document.querySelector("#leftTop").innerHTML = '<div style="text-align: center;color: white;margin-top: 25px">' + res.message.alert[0].alarmTp1 + res.message.alert[0].alarmTp2 + '预警' +'</div>' + '<div style="text-indent: 2em;color: white;margin: 10px auto;width: 95%;">' + res.message.alert[0].content + '</div>'
+                        document.querySelector("#leftBottom").innerHTML = '<div style="margin-left: 250px;margin-top: 5px;border-radius: 10px; background: green;width: 120px;text-align: center">空气质量:&nbsp'+ res.message.pm25.quality +'</div><div style="text-align: center;font-size: 38px;display: flex;justify-content: center;margin-top: 15px">' + res.message.realtime.weather.temperature + '<div style="display: flex;flex-direction: column;font-size: 20px">℃' + '<div>'+res.message.realtime.weather.info +'</div>'+ '</div>' + '</div>' + '<div style="text-align: center;margin-top: 10px;font-size: 14px;">发布时间:&nbsp&nbsp' + res.message.realtime.date + ' ' + res.message.realtime.time + '</div>' + '<div style="display: flex;margin: 0 auto;margin-top: 10px;height: 50px;border-radius: 18px;background-color: rgba(255, 255, 255, 0.5);text-align: center;font-size: 18px;width: 95%;">'  + '<div style="flex-grow: 1;display: flex;flex-direction: column;justify-content: space-around">' + '<div style="color: black">' +res.message.realtime.weather.humidity + '%</div>' + '<div style="font-size: 15px;color: #ccc">湿度</div>' +'</div>' + '<div style="flex-grow: 1;display: flex;flex-direction: column;justify-content: space-around">'+ '<div style="color: black">' + res.message.realtime.wind.direct +'</div>' + '<div style="font-size: 15px;color: #ccc">风向</div>' + '</div>' + '<div style="flex-grow: 1;display: flex;flex-direction: column;justify-content: space-around">'+ '<div style="color: black">' + res.message.realtime.wind.power + '</div>' + '<div style="font-size: 15px;color: #ccc">风力</div>' + '</div>' + '</div>'
+                        let hour = []
+                        let temp = []
+                        let wind = []
+                        for(let i=0; i < 24; i++) {
+                            hour[i] = res.message.hourly_forecast[i].hour
+                            temp[i] = res.message.hourly_forecast[i].temperature
+                            wind[i] = res.message.hourly_forecast[i].wind_speed
+                        }
+                        let option5 = {
+                            xAxis: {
+                                type: 'category',
+                                data: hour
+                            },
+                            yAxis: {
+                                type: 'value',
+                                max: null,
+                                min: 0
+                            },
+                            legend: {
+                                data: ['温度', '风速']
+                            },
+                            tooltip : {
+                               formatter: function (params) {
+                                   if(params.length == 1){
+                                       if(params[0].seriesName == '风速'){
+                                           return  '时间:&nbsp' +params[0].axisValue+':00<br/>风速:&nbsp'+params[0].data + 'm/s'
+                                       }else{
+                                        return  '时间:&nbsp' +params[0].axisValue+':00<br/>温度:&nbsp'+params[0].data + '℃'
+                                       }
+                                   }else{
+                                       return  '时间:&nbsp' +params[0].axisValue+':00<br/>温度:&nbsp'+params[0].data+'℃<br/>风速:&nbsp'+params[1].data + 'm/s'
+                                   }
+                              }
+                            },
+                            series: [
+                                {
+                                    name: '温度',
+                                    type: 'bar',
+                                    data: temp,
+                                    barCategoryGap: 40,
+                                    markPoint: {
+                                        data: [
+                                            {
+                                                type: 'max',
+                                                name: '最大值'
+                                            },
+                                            {
+                                                type: 'min',
+                                                name: '最小值'
+                                            }
+                                        ]
+                                    },
+                                    markLine: {
+                                        data: [
+                                            {
+                                                type: 'average',
+                                                name: '平均值'
+                                            }
+                                        ]
+                                    },
+                                    label: {
+                                        show: false,
+                                        rotate: 60
+                                    },
+                                    barWidth: '20'
+                                },
+                                {
+                                    name: '风速',
+                                    data: wind,
+                                    type: 'line'
+                                }
+                            ]
+                        }
+                        bottomLeft.setOption(option5)
+                        let wuran = []
+                        wuran[0] = res.message.pm25.pm10
+                        wuran[1] = res.message.pm25.pm25
+                        wuran[2] = res.message.pm25.no2
+                        wuran[3] = res.message.pm25.so2
+                        wuran[4] = res.message.pm25.co
+                        wuran[5] = res.message.pm25.o3
+                        let option7 = {
+                            color: ['#3398DB'],
+                            tooltip: {
+                                trigger: 'axis',
+                                axisPointer: {
+                                    type: 'shadow'
+                                },
+                                formatter: function (params) {
+                                   return  '污染成分:&nbsp' +params[0].axisValue+'<br/>&nbsp&nbsp'+params[0].data+'μg/立方米'
+                              }
+                            },
+                            grid: {
+                                left: '3%',
+                                right: '4%',
+                                bottom: '3%',
+                                containLabel: true
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    data: ['PM10', 'PM2.5', 'NO2', 'SO2', 'CO', 'O3'],
+                                    axisTick: {
+                                        alignWithLabel: true
+                                    },
+                                    axisLabel: {
+                                        color: 'rgba(255, 255, 255, .6)',
+                                        fontSize: '12',
+                                        interval: 0
+                                    },
+                                    axisLine: {
+                                        show: false
+                                    }
+                                }
+                            ],
+                            yAxis: [
+                                {
+                                    type: 'value',
+                                    axisLabel: {
+                                        color: 'rgba(255, 255, 255, .6)',
+                                        fontSize: '12'
+                                    },
+                                    axisLine: {
+                                        lineStyle: {
+                                            color: 'rgba(255, 255, 255, .1)',
+                                            width: 2
+                                        }
+                                    },
+                                    splitLine: {
+                                        lineStyle: {
+                                            color: 'rgba(255, 255, 255, .1)'
+                                        }
+                                    }
+                                }
+                            ],
+                            series: [
+                                {
+                                    name: '成分',
+                                    type: 'bar',
+                                    barWidth: '35%',
+                                    data: wuran,
+                                    itemStyle: {
+                                        barBorderRadius: 5
+                                    }
+                                }
+                            ]
+                        };
+                        bottomRight.setOption(option7)
+                        let today = 0
+                        for(let i=0; i<res.message.weather.length; i++){
+                            if(res.message.realtime.date == res.message.weather[i]) {
+                                today = i
+                            }
+                        }
+                        document.querySelector("#rightTop").innerHTML = '<div style="display: flex;margin-top: 25px;height: 140px;border-radius: 15px;background: rgba(255, 255, 255, 0.5);"><div style="flex-grow: 1;display: flex;flex-direction: column;justify-content: space-around;align-items: center"><div style="color: black;font-size: 20px;font-weight: 800">今天</div><div style="color: #ccc">'+res.message.weather[today].info.day[1]+'</div><div style="color: black">'+res.message.weather[today].info.night[2]+'~'+res.message.weather[today].info.day[2]+'℃</div><div style="background: green;border-radius: 5px;width: 35px; text-align: center">'+res.message.weather[today].aqi+'</div></div><div style="flex-grow: 1;display: flex;flex-direction: column;justify-content: space-around;align-items: center"><div style="color: black;font-size: 20px;font-weight: 800">明天</div><div style="color: #ccc">'+res.message.weather[today+1].info.day[1]+'</div><div style="color: black">'+res.message.weather[today+1].info.night[2]+'~'+res.message.weather[today+1].info.day[2]+'℃</div><div style="background: green;border-radius: 5px;width: 35px; text-align: center">'+res.message.weather[today+1].aqi+'</div></div><div style="flex-grow: 1;display: flex;flex-direction: column;justify-content: space-around;align-items: center"><div style="color: black;font-size: 20px;font-weight: 800">后天</div><div style="color: #ccc">'+res.message.weather[today+2].info.day[1]+'</div><div style="color: black">'+res.message.weather[today+2].info.night[2]+'~'+res.message.weather[today+2].info.day[2]+'℃</div><div style="background: green;border-radius: 5px;width: 35px; text-align: center">'+res.message.weather[today+2].aqi+'</div></div></div>'
+                        document.querySelector("#rightBottom").innerHTML = '<div style="display: flex;margin-top: 25px;height: 140px;border-radius: 15px;background: rgba(255, 255, 255, 0.5);justify-content: space-around"><div style="display: flex;flex-direction: column;width: 130px;align-items: center"><div style="text-align: center;color: black;font-weight: 600">穿衣指数</div><div style="color: #237ad4;font-size: 18px;font-weight: 800;font-family: 宋体">'+res.message.life.info.chuanyi[0]+'</div><div style="text-indent: 2em;color: black;width: 90%;font-size: 14px">'+res.message.life.info.chuanyi[1]+'</div></div><div style="display: flex;flex-direction: column;width: 130px;align-items: center"><div style="text-align: center;color: black;font-weight: 600">紫外线指数</div><div style="color: #237ad4;font-size: 18px;font-weight: 800;font-family: 宋体">'+res.message.life.info.ziwaixian[0]+'</div><div style="text-indent: 2em;color: black;width: 90%;font-size: 14px">'+res.message.life.info.ziwaixian[1]+'</div></div><div style="display: flex;flex-direction: column;width: 130px;align-items: center"><div style="text-align: center;color: black;font-weight: 600">感冒指数</div><div style="color: #237ad4;font-size: 18px;font-weight: 800;font-family: 宋体">'+res.message.life.info.ganmao[0]+'</div><div style="text-indent: 2em;color: black;width: 90%;font-size: 14px">'+res.message.life.info.ganmao[1]+'</div></div></div>'
+                        document.querySelector("#bottomMiddle").innerHTML = '<div style="display: flex;margin-top: 25px;height: 180px;border-radius: 15px;background: rgba(255, 255, 255, 0.5);justify-content: space-around"><div style="display: flex;flex-direction: column;width: 130px;align-items: center;justify-content: space-around"><div style="text-align: center;color: black;font-weight: 600">运动指数</div><div style="color: #237ad4;font-size: 18px;font-weight: 800;font-family: 宋体">'+res.message.life.info.yundong[0]+'</div><div style="text-indent: 2em;color: black;width: 90%;font-size: 14px">'+res.message.life.info.yundong[1]+'</div></div><div style="display: flex;flex-direction: column;width: 130px;align-items: center;justify-content: space-around"><div style="text-align: center;color: black;font-weight: 600">污染指数</div><div style="color: #237ad4;font-size: 18px;font-weight: 800;font-family: 宋体">'+res.message.life.info.wuran[0]+'</div><div style="text-indent: 2em;color: black;width: 90%;font-size: 14px">'+res.message.life.info.wuran[1]+'</div></div></div>'
+                    }
+                })
+            }else{
+                url = [
+                    'http://www.hnftp.gov.cn/yshj/yqzt/syzyswq/',
+                    'http://www.hnftp.gov.cn/yshj/yqzt/hnlsla/',
+                    'http://www.hnftp.gov.cn/yshj/yqzt/syyz/',
+                    'http://www.hnftp.gov.cn/yshj/yqzt/hkfxc/',
+                    'http://www.hnftp.gov.cn/yshj/yqzt/jdxq/',
+                    'http://www.hnftp.gov.cn/yshj/yqzt/hkgjgx/',
+                    'http://www.hnftp.gov.cn/yshj/yqzt/hnstrjy/',
+                    'http://www.hnftp.gov.cn/yshj/yqzt/hkzhbsq/',
+                    'http://www.hnftp.gov.cn/yshj/yqzt/yangpu/',
+                    'http://www.hnftp.gov.cn/yshj/yqzt/yangpu/',
+                    'http://www.hnftp.gov.cn/yshj/yqzt/yangpu/',
+                    'http://www.hnftp.gov.cn/yshj/yqzt/boao/',
+                    'http://www.hnftp.gov.cn/yshj/yqzt/wcgjhtc/'
+                ]
+                $(location).attr('href', url[params.dataIndex]);
+            }
+		});
+    })
+    let option1 = {
+        tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b} : {c} ({d}%)'
+        },
+        series: [{
+            name: '年度报告',
+            type: 'pie',
+            radius: [0, 40],
+            center: ['50%', '50%'],
+            roseType: 'area',
+            itemStyle: {
+                borderRadius: 5
+            },
+            data: [
+                { name: '海口市', value: 17915815},
+                { name: '琼海市', value: 2920957},
+                { name: '三亚市', value: 6954120},
+                { name: '儋州市', value: 3594060},
+                { name: '琼海市', value: 2920957},
+                { name: '文昌市', value: 2635012},
+                { name: '临高县', value: 2042233},
+            ]
+        }]
+    }
+    let option2 = {
+        /**
+        timeline: {
+            axisType: 'category',
+            autoPlay: true,
+            playInterval: 1500,
+            data: yearList,
+            label: {
+                fontSize: 18
+            }
+        },**/
+        animationDuration: function (arg) {
+            return 200*(arg+1)
+        },
+        xAxis: {
+            type: 'value',
+            axisLine: {
+                lineStyle: {
+                    color: 'white'
+                }
+            }
+        },
+        yAxis: {
+            type: 'category',
+            data: ['大东海', '三亚湾', '天涯海角', '日月湾', '椰梦长廊', '人口(万)'],
+            axisLine: {
+              lineStyle: {
+                  color: 'white'
+              }
+            },
+            minInterval: 1 //自动计算的坐标轴最小间隔大小。
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        itemStyle: {
+            borderRadius: 2
+        },
+        grid: {
+            left: '15%',
+            right: '5%',
+            top: '20%',
+            bottom: '30%'
+        },
+        series: [
+            {
+                type: 'bar',
+                color: '#237ad4',
+                data: [10000, 2000, 4000, 8000, 10000, 12000],
+                markLine: {
+                    data: [
+                        {
+                            type: 'average',
+                            name: '平均值'
+                        }
+                    ]
+                },
+                barWidth: '80%'
+            }
+        ]
+    }
+    let option3 = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        series: [
+            {
+                name: '用户评论',
+                type: 'pie',
+                radius: '60%',
+                data: [
+                    {value: 1002, name: '小洞天'},
+                    {value: 964, name: '景区'},
+                    {value: 395, name: '三亚'},
+                    {value: 363, name: '海边'},
+                    {value: 114, name: '椰林'},
+                    {value: 282, name: '婚纱照'}
+                ],
+                labelLine: {
+                  normal: {
+                      show: false
+                  }
+                },
+                itemStyle: {
+                    normal: {
+                        label: {
+                            textStyle: {
+                                color:'white',
+                                fontSize: 12
+                            }
+                        }
+                    }
+                },
+                normal: {
+                    textStyle: {
+                        color: 'white'
+                    }
+                },
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    }
+    let xDataArr = ['蜈支洲岛','椰梦长廊','亚特兰蒂斯','后海村','西岛','五指山','槟榔谷','日月湾','香水岛','全富岛','木兰湾','海甸岛']
+    let yDataArr = ["500","450","600","350" ,"400","250","170","50","260","280","320","230","243"]
+    let yDataArr2 = ["200","150","400","150" ,"600","450","270","350","160","210","380","120","213"]
+    let option5 = {
+        animation: true,
+        //animationDuration: 1800,
+        animationDuration: function (arg) {
+            return 1000*arg
+        },
+        animationEasing: 'bounceOut',
+        xAxis: {
+            type: 'category',
+            data: xDataArr
+        },
+        yAxis: {
+            type: 'value',
+            max: 6
+        },
+        legend: {
+            data: ['搜索次数', '游客数量'],
+            left: 'left',
+            textStyle: {
+                color: 'rgba(249, 249, 249, 1)'
+            }
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        series: [
+            {
+                name: '搜索次数',
+                type: 'bar',
+                data: yDataArr,
+                barCategoryGap: 40,
+                markPoint: {
+                    data: [
+                        {
+                            type: 'max',
+                            name: '最大值'
+                        },
+                        {
+                            type: 'min',
+                            name: '最小值'
+                        }
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {
+                            type: 'average',
+                            name: '平均值'
+                        }
+                    ]
+                },
+                label: {
+                    show: true,
+                    rotate: 60
+                },
+                barWidth: '30'
+            },
+            {
+                name: '游客数量',
+                data: yDataArr2,
+                type: 'line'
+            }
+        ]
+    }
+    let option6 = {
+        radar: {
+            indicator: dataMax,
+            radius: 59,
+            name: {
+                formatter: '【{value}】',
+                textStyle: {
+                    color: 'white'
+                }
+            },
+            axisLine: {
+                lineStyle: {
+                    color: 'rgba(211, 253, 250, 0.8)'
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: 'rgba(211, 253, 250, 0.8)'
+                }
+            }
+        },
+        legend: {
+            data: ['2018年', '2019年', '2020年'],
+            left: 'top',
+            textStyle: {
+                color: 'rgba(249, 249, 249, 1)'
+            }
+        },
+        series: [
+            {
+                type: 'radar',
+                data: [
+                    {
+                        name: '2018年',
+                        value: [71,51,83,92,73]
+                    },
+                    {
+                        name: '2019年',
+                        value: [78,63,85,88,90]
+                    },
+                    {
+                        name: '2020年',
+                        value: [82,77,80,83,95]
+                    }
+                ],
+                label: {
+                    emphasis: {
+                        show: true
+                    }
+                }
+            }
+        ]
+    }
+    let option7 = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        xAxis: {},
+        yAxis: {},
+        series: [{
+            symbolSize: 20,
+            data: [
+                [1, 7.54],
+                [1, 8.04],
+                [2, 6.25],
+                [2, 5.88],
+                [3, 5.11],
+                [3, 4.81],
+                [4, 6.03],
+                [4, 5.83],
+                [5, 6.16],
+                [5, 6.66],
+                [6, 5.11],
+                [6, 5.81],
+                [7, 5.33],
+                [7, 5.03],
+                [8, 6.01],
+                [8, 6.96],
+                [9, 7.82],
+                [9, 8.22],
+                [10, 9.20],
+                [10, 9.20],
+                [11, 9.20],
+                [11, 8.20],
+                [12, 9.23],
+                [12, 10.23]
+            ],
+            type: 'scatter'
+        }]
+    }
+    leftTop.setOption(option1)
+    leftBottom.setOption(option2)
+    rightTop.setOption(option3)
+    bottomLeft.setOption(option5)
+    bottomMiddle.setOption(option6)
+    bottomRight.setOption(option7)
+    window.onresize = function () {
+        myChart.resize()
+    }
+</script>
+</body>
+</html>

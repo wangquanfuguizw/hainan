@@ -1,0 +1,230 @@
+*{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html{
+            height: 100%;
+        }
+        body{
+            height: 100%;
+            line-height: 1.15;
+            display: flex;
+            flex-direction: column;
+            background: url("../img/bg.jpg") no-repeat top center;
+            background-size: 100% 100%;
+            overflow: hidden;
+        }
+        .top{
+            height: 3.5rem;
+            color: white;
+            font-size: 25px;
+            position: relative;
+        }
+        .showTime{
+            position: absolute;
+            top: 0;
+            right: 1.5rem;
+            line-height: 3rem;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.55rem;
+        }
+        .top_bg{
+            height: 40px;
+            text-align: center;
+            background: url("../img/head_bg2.png") no-repeat;
+            background-size: 100% 100%;
+        }
+        .middle{
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .middleLeft{
+            width: 400px;
+            height: 400px;
+            display: flex;
+            flex-wrap: nowrap;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .leftTop {
+            position: relative;
+            width: 400px;
+            height: 180px;
+            box-shadow: 0 0 40px #237ad4 inset;
+            border: 2px solid #237ad4;
+            z-index: 3;
+        }
+        .leftBottom{
+            position: relative;
+            width: 400px;
+            height: 180px;
+            box-shadow: 0 0 40px #237ad4 inset;
+            border: 2px solid #237ad4;
+            z-index: 3;
+        }
+        .rightTop{
+            position: relative;
+            width: 400px;
+            height: 180px;
+            box-shadow: 0 0 40px #237ad4 inset;
+            border: 2px solid #237ad4;
+            z-index: 3;
+        }
+        .rightBottom{
+            position: relative;
+            width: 400px;
+            height: 180px;
+            box-shadow: 0 0 40px #237ad4 inset;
+            border: 2px solid #237ad4;
+            z-index: 3;
+        }
+        .middleRight{
+            width: 400px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .bottom{
+            height: 260px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .bottomLeft{
+            position: relative;
+            width: 800px;
+            height: 220px;
+            box-shadow: 0 0 40px #237ad4 inset;
+            border: 2px solid #237ad4;
+            z-index: 3;
+        }
+        .bottomMiddle{
+            position: relative;
+            width: 300px;
+            height: 220px;
+            box-shadow: 0 0 40px #237ad4 inset;
+            border: 2px solid #237ad4;
+            z-index: 3;
+        }
+        .bottomRight{
+            position: relative;
+            width: 300px;
+            height: 220px;
+            box-shadow: 0 0 40px #237ad4 inset;
+            border: 2px solid #237ad4;
+            z-index: 3;
+        }
+        .map{
+            width: 600px;
+            height: 400px;
+            box-shadow: 0 0 40px #237ad4 inset;
+            border: 2px solid #237ad4;
+            position: relative;
+            z-index: 3;
+        }
+        .mapEchart{
+            position: absolute;
+            z-index: 5;
+        }
+        .image-border{
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            z-index: 4;
+        }
+        .image-border1 {
+            top: -4px;
+            left: -4px;
+            border-left: 5px solid #286fe7;
+            border-top: 5px solid #286fe7;
+        }
+        .image-border2 {
+            top: -4px;
+            right: -4px;
+            border-right: 5px solid #286fe7;
+            border-top: 5px solid #286fe7;
+        }
+        .image-border3 {
+            bottom: -4px;
+            left: -4px;
+            border-bottom: 5px solid #286fe7;
+            border-left: 5px solid #286fe7;
+        }
+        .image-border4 {
+            bottom: -4px;
+            right: -4px;
+            border-right: 5px solid #286fe7;
+            border-bottom: 5px solid #286fe7;
+        }
+        .image-title{
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            width: 80px;
+            height: 30px;
+            line-height: 30px;
+            background-color: #237ad4;
+            border-radius: 20px;
+            z-index: 6;
+        }
+        .bg_map{
+            position: absolute;
+            height: 450px;
+            width: 450px;
+            background: url("../img/map.png");
+            left: 50%;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            opacity: 0.3;
+            background-size: 100% 100%;
+        }
+        .bg_map2{
+            position: absolute;
+            height: 520px;
+            width: 520px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            background: url("../img/lbx.png");
+            background-size: 100% 100%;
+            animation: rotate1 15s linear infinite;
+        }
+        .bg_map3{
+            position: absolute;
+            height: 500px;
+            width: 500px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            background: url("../img/jt.png");
+            background-size: 100% 100%;
+            animation: rotate2 15s linear infinite;
+            opacity: 0.4;
+        }
+        @keyframes rotate1 {
+            form {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+        @keyframes rotate2 {
+            form {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(-360deg);
+            }
+        }

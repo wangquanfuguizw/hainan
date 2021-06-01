@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/echarts.min.js"></script>
+</head>
+<body>
+<div id="chart_map" style="width:600px;height:400px;border: 1px solid red"></div>
+<button id="modify">修改数据</button>
+<button id="add">增加数据</button>
+<script>
+    let mCharts = echarts.init(document.getElementById('chart_map'))
+    let xDataArr = ['张三', '李四', '王五', '闰土', '小米', '华为', '三星']
+    let yDataArr = [88, 92, 56, 78, 91, 95, 40]
+    let option = {
+        animation: true,
+        //animationDuration: 1800,
+        animationDuration: function (arg) {
+            return 1000*arg
+        },
+        animationEasing: 'bounceOut',
+        xAxis: {
+            type: 'category',
+            data: xDataArr
+        },
+        yAxis: {
+          type: 'value',
+            max: 6
+        },
+        series: [
+            {
+                type: 'bar',
+                data: yDataArr,
+                barCategoryGap: 40,
+                markPoint: {
+                    data: [
+                        {
+                            type: 'max',
+                            name: '最大值'
+                        },
+                        {
+                            type: 'min',
+                            name: '最小值'
+                        }
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {
+                            type: 'average',
+                            name: '平均值'
+                        }
+                    ]
+                },
+                label: {
+                    show: true,
+                    rotate: 60
+                },
+                barWidth: '30'
+            }
+        ]
+    }
+    mCharts.setOption(option)
+    let btnmodify = document.getElementById('modify')
+    btnmodify.onclick = function () {
+        let newyDataArr = [50, 72, 86, 88, 95, 91, 30]
+        let option = {
+            series: [
+                {
+                    data: newyDataArr
+                }
+            ]
+        }
+        mCharts.setOption(option)
+    }
+    let add = document.getElementById('add')
+    add.onclick = function () {
+        xDataArr.push('小旺')
+        yDataArr.push(99)
+        let option = {
+            xAxis: {
+              data: xDataArr
+            },
+            series: [
+                {
+                    data: yDataArr
+                }
+            ]
+        }
+        mCharts.setOption(option)
+    }
+</script>
+</body>
+</html>

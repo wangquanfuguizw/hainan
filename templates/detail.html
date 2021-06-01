@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>海南自贸港数据可视化</title>
+    <script src="/static/echarts.min.js"></script>
+    <script src="/static/jquery.js"></script>
+    <link href="/static/css/index.css">
+</head>
+<body>
+<div>{{ result }}</div>
+<button onclick='alert("aaaaa")'>点击</button>
+<script>
+    function submit() {
+        console.log(111)
+        $.ajaxSetup({
+            data:{csrfmiddlewaretoken:'{{ csrf_token }}'}
+        })
+        $.ajax({
+            url: 'http://127.0.0.1:8000/weather/',
+            type: "POST",
+            data: {
+                name: '海口'
+            },
+            success(res) {
+                console.log(res)
+            }
+        })
+    }
+</script>
+</body>
+</html>
